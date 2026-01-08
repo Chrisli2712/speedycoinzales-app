@@ -27,7 +27,15 @@
     .hold { color: #38bdf8; }
   </style>
 </head>
-
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "bc6352cb-5fb4-4fbb-9e54-066c7e1f57dc",
+    });
+  });
+</script>
 <body>
   <h1>🚀 SpeedyCoinZales</h1>
   <div id="signals">Lade Signale…</div>
