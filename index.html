@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpeedyCoinZales</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 16px;
+    }
+    h1 { font-size: 1.4rem; }
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .buy { color: #22c55e; }
+    .hold { color: #38bdf8; }
+  </style>
+</head>
+
+<body>
+  <h1>🚀 SpeedyCoinZales</h1>
+  <div id="signals">Lade Signale…</div>
+
+  <script>
+    const API_URL = "https://speedycoinzales-m4y8.onrender.com/signal";
+
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("signals");
+        container.innerHTML = "";
+
+        data.signale.forEach(s => {
+          const div = document.createElement("div");
+          div.className = "card";
+          div.innerHTML = `
+            <strong>${s.asset}</strong> (${s.börse})<br>
+            <span class="${s.action.toLowerCase()}">
+              ${s.action} – ${s.confidence_score} %
+            </span><br>
+            ${s.suggested_amount_eur ? "Betrag: " + s.suggested_amount_eur + " €<br>" : ""}
+            <small>${s.reason}</small>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
